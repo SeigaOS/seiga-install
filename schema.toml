@@ -1,0 +1,43 @@
+[Keyboard]
+layout=""
+
+[Mirrors]
+mirrors=[]
+
+[Partitions]
+partitions=[]
+
+[Mount]
+mount=[]
+
+[bootloader]
+bootloader="" # example grub
+
+[Swap]
+on="True" # disable swap is an option
+file="/swapfile" #example
+
+[Host]
+host=""
+
+[Root]
+password="Balls"
+
+[Wheel-Users]
+wheel-users=[]
+
+[Normal-Users]
+normal-users=[]
+
+[Audio]
+audio="piprewire"
+
+[Kernel]
+kernel=""
+
+[Network]
+ssid=""
+passphrase=""
+
+[Timezone]
+timezone=""
