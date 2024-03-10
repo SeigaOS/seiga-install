@@ -127,7 +127,7 @@ def set_hostname(host: str) -> None:
 
 
 def set_rootpass(password: str) -> None:
-    command.run(["chpasswd", "-R", "/mnt"], input="root:" + password)
+    command.run(["chpasswd"], input="root:" + password)
 
 
 def install_bootloader(bootloader: str, uefi: bool, partition: str):
