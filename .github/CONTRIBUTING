@@ -1,0 +1,42 @@
+# Contributing to SeigaOS Installer
+
+Thank you for considering contributing to SeigaOS Installer! We welcome your contributions to help improve and enhance our project. Before you get started, please take a moment to read through this contributing guide.
+
+## Pull Requests
+
+We encourage you to submit pull requests for any improvements, bug fixes, or new features. However, please note that submitting a pull request does not guarantee its immediate acceptance.
+
+### How to Contribute
+
+1. Fork the repository to your GitHub account.
+2. Create a new branch for your feature or fix: `git checkout -b feature-branch`.
+3. Make your changes and commit them with clear and concise commit messages.
+4. Push your branch to your fork: `git push origin feature-branch`.
+5. Open a pull request from your fork to the main repository.
+
+### What to Include
+
+When submitting a pull request, please provide the following information:
+
+- A clear and descriptive title for your pull request.
+- A detailed description of the changes and the problem or feature it addresses.
+- If applicable, reference any related issues.
+
+### Code Style
+
+Please follow the existing code style and conventions used in the project.
+We use TABS for spacing in python NOT spaces
+
+## Issues
+
+If you discover a bug, have a suggestion, or want to discuss something related to SeigaOS Installer, please open an issue on the [GitHub repository](https://github.com/SeigaOS/seiga-install/issues).
+
+## Code of Conduct
+
+Please note that this project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+
+## Project Maintainers
+
+The project is maintained by [https://www.github.com/Ubuntufanboy]. Feel free to reach out to him for any questions.
+
+Thank you for your contribution to SeigaOS Installer!
