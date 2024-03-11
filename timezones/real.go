@@ -14,6 +14,7 @@ import (
 	"github.com/pelletier/go-toml"
 )
 
+//test both
 // func setSystemTimezone(timezone string) {
 // 	zoneinfoPath := "/usr/share/zoneinfo/" + timezone
 // 	localtimePath := "/etc/localtime"
