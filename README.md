@@ -1,5 +1,7 @@
 # SeigaOS Installer
 
+![download](https://github.com/Debianfanboy/seiga-install/assets/113194674/4191fb1c-1d1f-4fe9-9b05-dc74293e2c6d)
+
 Welcome to SeigaOS Installer, the tool that facilitates the installation of the SeigaOS base system using the settings configured in the Text User Interface (TUI). Please note that this project is currently in development and is not considered stable. 
 
 ## Overview
