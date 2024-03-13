@@ -2,7 +2,10 @@ module github.com/SeigaOS/seiga-install
 
 go 1.22.0
 
-require github.com/charmbracelet/huh v0.3.0
+require (
+	github.com/charmbracelet/huh v0.3.0
+	github.com/davecgh/go-spew v1.1.1
+)
 
 require (
 	github.com/atotto/clipboard v0.1.4 // indirect

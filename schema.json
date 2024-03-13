@@ -1,0 +1,19 @@
+{
+  "groups": [
+    {
+      "title": "Keyboard Configuration",
+      "description": "Configure the keyboard layout to use.",
+      "name": "keyboard",
+      "inputs": [
+        {
+          "title": "Keymap",
+          "name": "keymap",
+          "description": "Select the keymap to use.",
+          "type": "select",
+          "choicesFunction": "getKeymaps",
+          "value": "us"
+        }
+      ]
+    }
+  ]
+}
