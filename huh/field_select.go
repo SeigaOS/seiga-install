@@ -56,10 +56,13 @@ func NewSelect[T comparable]() *Select[T] {
 		theme:     ThemeCharm(),
 	}
 }
-func (s *Select[T]) SetOptions(options ...Option[T]) *Select[T] {
+func (s *Select[T]) SetOptions(options ...Option[T]) {
 	s.options = options
 	s.filteredOptions = options
-	return s
+}
+
+func (s *Select[T]) SetSelected(selected int) {
+	s.selected = selected
 }
 
 // Value sets the value of the select field.

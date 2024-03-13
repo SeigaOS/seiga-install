@@ -5,9 +5,10 @@ go 1.22.0
 require (
 	github.com/charmbracelet/huh v0.3.0
 	github.com/charmbracelet/log v0.3.1
+	github.com/davecgh/go-spew v1.1.1
 )
 
-replace github.com/charmbracelet/huh => ./huh@v0.3.0/
+replace github.com/charmbracelet/huh => ./huh
 
 require (
 	github.com/atotto/clipboard v0.1.4 // indirect

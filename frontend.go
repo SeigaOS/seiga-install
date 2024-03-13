@@ -34,6 +34,9 @@ var funcs = map[string]func() ([]huh.Option[string], error){
 		if err != nil {
 			return nil, err
 		}
+		if len(opts) == 0 {
+			return nil, fmt.Errorf("no keymaps found")
+		}
 		return opts, nil
 
 	},
@@ -88,6 +91,8 @@ func (c *Config) Form() (*huh.Form, error) {
 							return nil, err
 						}
 						selectEl.Options(opts...)
+						selectEl.SetOptions(opts...) // This is a test to see if the patch works
+						selectEl.SetSelected(0)      // This framework kinda sucks
 					} else {
 						return nil, fmt.Errorf("choices function `%s` not found", *input.ChoicesFunction)
 					}
@@ -126,6 +131,7 @@ func main() {
 	}
 	// spew.Dump(config)
 	form, err := config.Form()
+	// spew.Dump(form)
 	// spew.Dump(form)
 	// inputs := []huh.Field{
 	// 	huh.NewSelect[string]().Title("Select").Description("Select").Options(AtoOpts([]string{"a", "b", "c"})...),
