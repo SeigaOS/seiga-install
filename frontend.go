@@ -107,7 +107,7 @@ func (c *Config) Form() (*huh.Form, error) {
 			case "confirm":
 				return nil, fmt.Errorf("confirm not implemented")
 			default:
-				return nil, fmt.Errorf("unknown input type: %s", input.Type)
+				return nil, fmt.Errorf("unknown input type: '%s'", input.Type)
 			}
 
 		}
