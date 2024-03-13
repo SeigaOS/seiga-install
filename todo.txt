@@ -1,0 +1,2 @@
+Add conditional form groups (e.g. enabling manual selection when the user doesn't want to select timezone automatically) @schema.json @frontend.go
+Add dynamic form fields within groups (e.g. when manually selecting timezone, dynamically update the subzone selection) @huh @frontend.go @schema.json
