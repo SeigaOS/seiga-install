@@ -3,20 +3,39 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	// "log"
 	"os"
 
 	// "github.com/BurntSushi/toml"
 	"github.com/charmbracelet/huh"
+	"path/filepath"
 	// "github.com/davecgh/go-spew/spew"
 	// "github.com/davecgh/go-spew/spew"
 )
 
-var funcs = map[string]func() []huh.Option[string]{
-	"getKeymaps": func() []huh.Option[string] {
+var funcs = map[string]func() ([]huh.Option[string], error){
+	"getKeymaps": func() ([]huh.Option[string], error) {
+		opts := make([]huh.Option[string], 0)
+		keymapDir := "/usr/share/kbd/keymaps"
+		err := filepath.Walk(keymapDir, func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if !info.IsDir() {
+				basename := info.Name()
+				name := strings.TrimSuffix(basename, ".map.gz") // Ext is probably .map.gz
+				opt := huh.NewOption(name, name)
+				opts = append(opts, opt)
+			}
+			return nil
+		})
+		if err != nil {
+			return nil, err
+		}
+		return opts, nil
 
-		return []huh.Option[string]{{Key: "vim", Value: "vim"}, {Key: "emacs", Value: "emacs"}}
 	},
 }
 
@@ -64,7 +83,11 @@ func (c *Config) Form() (*huh.Form, error) {
 					selectEl.Options(huh.NewOptions(input.Choices...)...)
 				} else {
 					if f, ok := funcs[*input.ChoicesFunction]; ok {
-						selectEl.Options(f()...)
+						opts, err := f()
+						if err != nil {
+							return nil, err
+						}
+						selectEl.Options(opts...)
 					} else {
 						return nil, fmt.Errorf("choices function `%s` not found", *input.ChoicesFunction)
 					}

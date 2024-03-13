@@ -1,5 +1,6 @@
 import tomllib
 class Options:
+    layout: str
     def __init__(self, filename):
         with open(filename, 'rb') as f:
             data = tomllib.load(f)
