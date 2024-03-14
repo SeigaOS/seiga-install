@@ -1,19 +1,19 @@
 {
   "groups": {
     "keyboard": {
-      "title": "Keyboard Configuration",
-      "description": "Configure the keyboard layout to use.",
-      "reference": "https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration",
+      "title": "test",
+      "description": "Conditional field test",
+      "reference": "",
       "inputs": {
         "test1": {
-          "title": "Boolean",
-          "description": "Boolean test",
+          "title": "Field 1",
+          "description": "Enable the next field?",
           "type": "boolean",
           "value": "true"
         },
         "test2": {
-          "title": "Boolean Skip",
-          "description": "See if skipping works",
+          "title": "Field 2",
+          "description": "I am conditional",
           "type": "boolean",
           "value": "true",
           "skipIf": {
