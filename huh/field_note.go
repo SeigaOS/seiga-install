@@ -19,7 +19,7 @@ type Note struct {
 	focused        bool
 
 	// options
-	skip       bool
+	skip       func() bool
 	width      int
 	height     int
 	accessible bool
@@ -32,7 +32,7 @@ func NewNote() *Note {
 	return &Note{
 		showNextButton: false,
 		theme:          ThemeCharm(),
-		skip:           true,
+		skip:           func() bool { return true },
 	}
 }
 
@@ -73,7 +73,11 @@ func (n *Note) Error() error {
 
 // Skip returns whether the note should be skipped or should be blocking.
 func (n *Note) Skip() bool {
-	return n.skip
+	return n.skip()
+}
+
+func (n *Note) SetSkipFunction(f func() bool) {
+	n.skip = f
 }
 
 // KeyBinds returns the help message for the note field.
@@ -185,7 +189,7 @@ func (n *Note) WithPosition(p FieldPosition) Field {
 	// if the note is the only field on the screen,
 	// we shouldn't skip the entire group.
 	if p.Field == p.FirstField && p.Field == p.LastField {
-		n.skip = false
+		n.skip = func() bool { return false }
 	}
 	n.keymap.Prev.SetEnabled(!p.IsFirst())
 	n.keymap.Next.SetEnabled(!p.IsLast())

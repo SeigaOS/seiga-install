@@ -40,6 +40,7 @@ type Text struct {
 	accessible bool
 	theme      *Theme
 	keymap     TextKeyMap
+	skip       func() bool
 }
 
 // NewText returns a new text field.
@@ -59,6 +60,7 @@ func NewText() *Text {
 		editorArgs:      editorArgs,
 		editorExtension: "md",
 		theme:           ThemeCharm(),
+		skip:            func() bool { return false },
 	}
 
 	return t
@@ -150,8 +152,16 @@ func (t *Text) Error() error {
 }
 
 // Skip returns whether the textarea should be skipped or should be blocking.
-func (*Text) Skip() bool {
-	return false
+func (t *Text) Skip() bool {
+	b := t.skip()
+	if b {
+		t.Blur()
+	}
+	return b
+}
+
+func (t *Text) SetSkipFunction(f func() bool) {
+	t.skip = f
 }
 
 // Focus focuses the text field.

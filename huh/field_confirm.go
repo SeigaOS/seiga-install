@@ -12,7 +12,7 @@ import (
 
 // Confirm is a form confirm field.
 type Confirm struct {
-	value *bool
+	value *string
 	key   string
 
 	// customization
@@ -22,7 +22,7 @@ type Confirm struct {
 	negative    string
 
 	// error handling
-	validate func(bool) error
+	validate func(string) error
 	err      error
 
 	// state
@@ -35,21 +35,23 @@ type Confirm struct {
 	accessible bool
 	theme      *Theme
 	keymap     ConfirmKeyMap
+	skip       func() bool
 }
 
 // NewConfirm returns a new confirm field.
 func NewConfirm() *Confirm {
 	return &Confirm{
-		value:       new(bool),
+		value:       new(string),
 		affirmative: "Yes",
 		negative:    "No",
-		validate:    func(bool) error { return nil },
+		validate:    func(string) error { return nil },
 		theme:       ThemeCharm(),
+		skip:        func() bool { return false },
 	}
 }
 
 // Validate sets the validation function of the confirm field.
-func (c *Confirm) Validate(validate func(bool) error) *Confirm {
+func (c *Confirm) Validate(validate func(string) error) *Confirm {
 	c.validate = validate
 	return c
 }
@@ -60,8 +62,16 @@ func (c *Confirm) Error() error {
 }
 
 // Skip returns whether the confirm should be skipped or should be blocking.
-func (*Confirm) Skip() bool {
-	return false
+func (c *Confirm) Skip() bool {
+	b := c.skip()
+	if b {
+		c.Blur()
+	}
+	return b
+}
+
+func (c *Confirm) SetSkipFunction(f func() bool) {
+	c.skip = f
 }
 
 // Affirmative sets the affirmative value of the confirm field.
@@ -77,7 +87,7 @@ func (c *Confirm) Negative(negative string) *Confirm {
 }
 
 // Value sets the value of the confirm field.
-func (c *Confirm) Value(value *bool) *Confirm {
+func (c *Confirm) Value(value *string) *Confirm {
 	c.value = value
 	return c
 }
@@ -140,8 +150,11 @@ func (c *Confirm) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		switch {
 		case key.Matches(msg, c.keymap.Toggle):
-			v := !*c.value
-			*c.value = v
+			if *c.value == "true" {
+				*c.value = "false"
+			} else {
+				*c.value = "true"
+			}
 		case key.Matches(msg, c.keymap.Prev):
 			cmds = append(cmds, prevField)
 		case key.Matches(msg, c.keymap.Next, c.keymap.Submit):
@@ -177,7 +190,7 @@ func (c *Confirm) View() string {
 		sb.WriteString("\n")
 	}
 
-	if *c.value {
+	if *c.value == "true" {
 		sb.WriteString(lipgloss.JoinHorizontal(
 			lipgloss.Center,
 			styles.FocusedButton.Render(c.affirmative),
@@ -205,16 +218,17 @@ func (c *Confirm) Run() error {
 func (c *Confirm) runAccessible() error {
 	fmt.Println(c.theme.Blurred.Base.Render(c.theme.Focused.Title.Render(c.title)))
 	fmt.Println()
-	*c.value = accessibility.PromptBool()
+	*c.value = accessibility.PromptString("Yes/No", func(s string) error { return nil })
 	fmt.Println(c.theme.Focused.SelectedOption.Render("Chose: "+c.String()) + "\n")
 	return nil
 }
 
 func (c *Confirm) String() string {
-	if *c.value {
-		return c.affirmative
-	}
-	return c.negative
+	// if *c.value {
+	// 	return c.affirmative
+	// }
+	// return c.negative
+	return *c.value
 }
 
 // WithTheme sets the theme of the confirm field.

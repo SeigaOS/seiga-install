@@ -1,44 +1,45 @@
 {
-  "groups": [
-    {
+  "groups": {
+    "keyboard": {
       "title": "Keyboard Configuration",
       "description": "Configure the keyboard layout to use.",
       "reference": "https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration",
-      "name": "keyboard",
-      "inputs": [
-        {
+      "inputs": {
+        "keymap": {
           "title": "Keymap",
-          "name": "keymap",
           "description": "Select the keymap to use.",
           "type": "select",
-          "choicesFunction": "getKeymaps",
+          "optionsSource": "getKeymaps",
           "value": "us"
         }
-      ]
+      }
     },
-    {
+    "time": {
       "title": "Timezone Configuration",
       "description": "Configure the timezone to use.",
       "reference": "https://wiki.archlinux.org/title/System_time",
-      "name": "timezone",
-      "inputs": [
-        {
-          "title": "Timezone",
-          "name": "timezone",
+      "inputs": {
+        "ntp": {
+          "description": "Enable NTP",
+          "type": "boolean",
+          "value": true
+        },
+        "setAutomatically": {
+          "description": "Set timezone automatically using ipapi.co/timezone",
+          "type": "boolean",
+          "value": true
+        },
+        "timezone": {
           "description": "Select the timezone to use.",
           "type": "select",
-          "choicesFunction": "getTimezones",
-          "value": "UTC"
-        },
-        {
-          "title": "Subzone",
-          "name": "subzone",
-          "description": "Select the subzone to use.",
-          "type": "select",
-          "choicesFunction": "getSubzones",
-          "value": "UTC"
+          "optionsSource": "getTimezones",
+          "value": "UTC",
+          "skipIf": {
+            "field": "time.setAutomatically",
+            "value": true
+          }
         }
-      ]
+      }
     }
-  ]
+  }
 }

@@ -40,6 +40,7 @@ type Select[T comparable] struct {
 	accessible bool
 	theme      *Theme
 	keymap     SelectKeyMap
+	skip       func() bool
 }
 
 // NewSelect returns a new select field.
@@ -53,6 +54,7 @@ func NewSelect[T comparable]() *Select[T] {
 		validate:  func(T) error { return nil },
 		filtering: false,
 		filter:    filter,
+		skip:      func() bool { return false },
 		theme:     ThemeCharm(),
 	}
 }
@@ -64,6 +66,11 @@ func (s *Select[T]) SetOptions(options ...Option[T]) {
 func (s *Select[T]) SetSelected(selected int) {
 	s.selected = selected
 }
+
+// func (s *Select[T]) SkipFunc(skipFunc func() bool) *Select[T] {
+// 	s.skipFunc = skipFunc
+// 	return s
+// }
 
 // Value sets the value of the select field.
 func (s *Select[T]) Value(value *T) *Select[T] {
@@ -139,8 +146,16 @@ func (s *Select[T]) Error() error {
 }
 
 // Skip returns whether the select should be skipped or should be blocking.
-func (*Select[T]) Skip() bool {
-	return false
+func (s *Select[T]) Skip() bool {
+	b := s.skip()
+	if b {
+		s.Blur()
+	}
+	return b
+}
+
+func (s *Select[T]) SetSkipFunction(f func() bool) {
+	s.skip = f
 }
 
 // Focus focuses the select field.

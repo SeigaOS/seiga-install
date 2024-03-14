@@ -37,6 +37,7 @@ type Input struct {
 	accessible bool
 	theme      *Theme
 	keymap     InputKeyMap
+	skip       func() bool
 }
 
 // NewInput returns a new input field.
@@ -48,6 +49,7 @@ func NewInput() *Input {
 		textinput: input,
 		validate:  func(string) error { return nil },
 		theme:     ThemeCharm(),
+		skip:      func() bool { return false },
 	}
 
 	return i
@@ -133,8 +135,16 @@ func (i *Input) Error() error {
 }
 
 // Skip returns whether the input should be skipped or should be blocking.
-func (*Input) Skip() bool {
-	return false
+func (i *Input) Skip() bool {
+	b := i.skip()
+	if b {
+		i.Blur()
+	}
+	return b
+}
+
+func (i *Input) SetSkipFunction(skip func() bool) {
+	i.skip = skip
 }
 
 // Focus focuses the input field.

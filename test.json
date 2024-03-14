@@ -1,0 +1,27 @@
+{
+  "groups": {
+    "keyboard": {
+      "title": "Keyboard Configuration",
+      "description": "Configure the keyboard layout to use.",
+      "reference": "https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration",
+      "inputs": {
+        "test1": {
+          "title": "Boolean",
+          "description": "Boolean test",
+          "type": "boolean",
+          "value": "true"
+        },
+        "test2": {
+          "title": "Boolean Skip",
+          "description": "See if skipping works",
+          "type": "boolean",
+          "value": "true",
+          "skipIf": {
+            "field": "keyboard.test1",
+            "value": "false"
+          }
+        }
+      }
+    }
+  }
+}

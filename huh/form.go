@@ -115,6 +115,9 @@ type Field interface {
 	// Skip returns whether this input should be skipped or not.
 	Skip() bool
 
+	// Sets a skip function that is then used in Skip().
+	SetSkipFunction(func() bool)
+
 	// KeyBinds returns help keybindings.
 	KeyBinds() []key.Binding
 

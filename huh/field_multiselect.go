@@ -42,6 +42,7 @@ type MultiSelect[T comparable] struct {
 	accessible bool
 	theme      *Theme
 	keymap     MultiSelectKeyMap
+	skip       func() bool
 }
 
 // NewMultiSelect returns a new multi-select field.
@@ -56,6 +57,7 @@ func NewMultiSelect[T comparable]() *MultiSelect[T] {
 		filtering: false,
 		filter:    filter,
 		theme:     ThemeCharm(),
+		skip:      func() bool { return false },
 	}
 }
 
@@ -145,8 +147,16 @@ func (m *MultiSelect[T]) Error() error {
 }
 
 // Skip returns whether the multiselect should be skipped or should be blocking.
-func (*MultiSelect[T]) Skip() bool {
-	return false
+func (m *MultiSelect[T]) Skip() bool {
+	b := m.skip()
+	if b {
+		m.Blur()
+	}
+	return b
+}
+
+func (m *MultiSelect[T]) SetSkipFunction(f func() bool) {
+	m.skip = f
 }
 
 // Focus focuses the multi-select field.
