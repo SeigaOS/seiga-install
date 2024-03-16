@@ -7,6 +7,9 @@ mirrors=[]
 [Partitions]
 partitions=[]
 
+[Fs]
+fs="" # File system type example ext4
+
 [Mount]
 mount=[]
 
@@ -15,7 +18,7 @@ bootloader="" # example grub
 
 [Swap]
 on="True" # disable swap is an option
-file="/swapfile" #example
+file="/swap" #example
 
 [Host]
 host=""
@@ -36,6 +39,8 @@ audio="piprewire"
 kernel=""
 
 [Network]
+iseth=""
+interface=""
 ssid=""
 passphrase=""
 
