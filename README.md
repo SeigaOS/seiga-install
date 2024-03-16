@@ -9,9 +9,9 @@ Welcome to SeigaOS Installer, the tool that facilitates the installation of the 
 
 ## Our development team
 
-- **True open source** our project is developed by random contributers who all met up to achive this goal
+- **True open source** our project is developed by random contributors who all met up to achieve this goal
 - **Built on passion** our project's development team earns nothing from this project. This project is not likely to grow. Nevertheless, we produce this project purely for the enjoyment and community.
-- **Not a professional team** one of our core concepts is the idea that anybody can achive anything at any skill level. SeigaOS is a testament to beginner contributions
+- **Not a professional team** one of our core concepts is the idea that anybody can achieve anything at any skill level. SeigaOS is a testament to beginner contributions
    
 ## Features
 
