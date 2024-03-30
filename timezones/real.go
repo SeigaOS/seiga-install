@@ -14,18 +14,6 @@ import (
 	"github.com/pelletier/go-toml"
 )
 
-//test both
-// func setSystemTimezone(timezone string) {
-// 	zoneinfoPath := "/usr/share/zoneinfo/" + timezone
-// 	localtimePath := "/etc/localtime"
-// 	if err := os.Remove(localtimePath); err != nil {
-// 		log.Fatalf("Failed to remove old timezone link: %v", err)
-// 	}
-// 	if err := os.Symlink(zoneinfoPath, localtimePath); err != nil {
-// 		log.Fatalf("Failed to create symlink for new timezone: %v", err)
-// 	}
-// }
-
 func setSystemTimezone(timezone string) error {
 	var cmd *exec.Cmd
 	switch runtime.GOOS {
