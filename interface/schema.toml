@@ -1,0 +1,46 @@
+wheel_users=[]
+normal_users=[]
+host=""
+root_password=""
+
+[keyboard]
+layout=""
+possible=[]
+
+[mirrors]
+mirrors=[]
+possible=[]
+
+[fs]
+fs="xfs" # File system type example ext4
+possible = ["ext4", "xfs", "bfs", "cramfs", "minix"]
+
+[bootloader]
+bootloader="grub" # example grub
+possible = ["systemd-boot", "grub"]
+
+[swap]
+on=true # disable swap is an option
+file="/swapfile" #example
+mnt = "/dev/zram0"
+type = "file"
+possible = ["file", "partition"]
+
+[audio]
+audio="pipewire"
+possible = []
+
+[kernel]
+kernel="linux69-tkg-eevdf-llvm"
+possible = []
+
+[network]
+# iseth=""
+# interface=""
+# ssid=""
+# passphrase=""
+provider = "NetworkManager"
+possible = ["wpa_supplicant", "NetworkManager"]
+
+[tz]
+timezone=""
