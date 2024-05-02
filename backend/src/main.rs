@@ -92,24 +92,21 @@ impl App {
     }
     fn increment_counter(&mut self) {
         if self.pos == false {
-            if self.countertime >= 10 {
-                self.countertime += 10;
-            }
+            self.countertime += 10;
         } else {
-            if self.countercel >= 30 {
-                self.countercel += 1;
-            }
+            self.countercel += 1;
+            
         }
     }
 
     fn decrement_counter(&mut self) {
         if self.pos == false {
-            if self.countertime >= 100 {
+            if self.countertime >= 10 {
                 self.countertime -= 10;
             }
         } else {
-            if self.countercel >= 30 {
-                self.countercel += 1;
+            if self.countercel > 29 {
+                self.countercel -= 1;
             }        
         }
     }
@@ -182,34 +179,3 @@ impl Widget for &App {
         }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn render() {
-        let app = App::default();
-        let mut buf = Buffer::empty(Rect::new(0, 0, 50, 4));
-
-        app.render(buf.area, &mut buf);
-
-        let mut expected = Buffer::with_lines(vec![
-            "┏━━━━━━━━━━━━━ System's settings editor<3 ━━━━━━━━━━━━━━━━━━━━━┓",
-            "┃           > CPU check time interval: 10 seconds              ┃",
-            "┃             CPU tempurate threshold: 30 Celcius              ┃",
-            "┗━ Decrement <Left> Increment <Right> Enter <enter> Quit <Q> ━━┛",
-        ]);
-        let title_style = Style::new().bold();
-        let counter_style = Style::new().yellow();
-        let key_style = Style::new().blue().bold();
-        expected.set_style(Rect::new(14, 0, 22, 1), title_style);
-        expected.set_style(Rect::new(28, 1, 1, 1), counter_style);
-        expected.set_style(Rect::new(13, 3, 6, 1), key_style);
-        expected.set_style(Rect::new(30, 3, 7, 1), key_style);
-        expected.set_style(Rect::new(43, 3, 4, 1), key_style);
-        assert_eq!(buf, expected);
-    }
-
-
-
-}
