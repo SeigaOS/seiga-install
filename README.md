@@ -47,6 +47,7 @@ SeigaOS is still under active development and may not be suitable for production
 We would like to express our gratitude to all contributors who have dedicated their time and skills to the SeigaOS project.
 
 Go check out Conor's github https://github.com/crsche he has been nothing but helpful and a key role to our project!
+
 Go check out Eloni's github [https://github.com/EloniX-X](https://github.com/EloniX-X) he has been nothing but helpful and a key role to our project!
 
 Enjoy exploring and customizing SeigaOS!
