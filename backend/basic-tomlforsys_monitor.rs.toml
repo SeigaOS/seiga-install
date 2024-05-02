@@ -1,0 +1,3 @@
+[tempcheck]
+checktimems = 60000
+checkthresholdcelc = 40.0
