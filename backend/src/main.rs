@@ -29,7 +29,6 @@ pub struct App {
 //true = time false = cel
 
 impl App {
-    /// runs the application's main loop until the user quits
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
         self.countertime = 10;
         self.countercel = 30;
@@ -45,11 +44,8 @@ impl App {
         frame.render_widget(self, frame.size());
     }
 
-    /// updates the application's state based on user input
     fn handle_events(&mut self) -> io::Result<()> {
         match event::read()? {
-            // it's important to check that the event is a key press event as
-            // crossterm also emits key release and repeat events on Windows.
             Event::Key(key_event) if key_event.kind == KeyEventKind::Press => {
                 self.handle_key_event(key_event)
             }
@@ -198,9 +194,9 @@ mod tests {
         app.render(buf.area, &mut buf);
 
         let mut expected = Buffer::with_lines(vec![
-            "┏━━━━━━━━━━━━━ System's settings editor<3 ━━━━━━━━━━━━━┓",
-            "┃                    Value: 0                    ┃",
-            "┃                                                ┃",
+            "┏━━━━━━━━━━━━━ System's settings editor<3 ━━━━━━━━━━━━━━━━━━━━━┓",
+            "┃           > CPU check time interval: 10 seconds              ┃",
+            "┃             CPU tempurate threshold: 30 Celcius              ┃",
             "┗━ Decrement <Left> Increment <Right> Enter <enter> Quit <Q> ━━┛",
         ]);
         let title_style = Style::new().bold();
