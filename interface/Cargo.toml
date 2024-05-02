@@ -11,6 +11,8 @@ toml = "0.8.12"
 interface-proc = { path = "../interface-proc" }
 lazy_static = "1.4.0"
 serde = { version = "1.0.198", features = ["derive"] }
+crossterm = "0.27.0"
+ron = "0.8.1"
 
 [lib]
 name = "interface_modules"

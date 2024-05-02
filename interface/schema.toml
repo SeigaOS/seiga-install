@@ -42,5 +42,5 @@ possible = []
 provider = "NetworkManager"
 possible = ["wpa_supplicant", "NetworkManager"]
 
-[tz]
+[time]
 timezone=""

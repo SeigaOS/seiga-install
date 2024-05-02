@@ -1,3 +1,5 @@
+use interface_modules::write2ron;
+
 fn main() {
-    println!("Hello, world!");
+    write2ron()
 }
