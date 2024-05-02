@@ -31,8 +31,8 @@ pub struct App {
 impl App {
     /// runs the application's main loop until the user quits
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
-        self.countercel = 40;
-        self.countercel = 60;
+        self.countertime = 10;
+        self.countercel = 30;
 
         while !self.exit {
             terminal.draw(|frame| self.render_frame(frame))?;
@@ -45,8 +45,11 @@ impl App {
         frame.render_widget(self, frame.size());
     }
 
+    /// updates the application's state based on user input
     fn handle_events(&mut self) -> io::Result<()> {
         match event::read()? {
+            // it's important to check that the event is a key press event as
+            // crossterm also emits key release and repeat events on Windows.
             Event::Key(key_event) if key_event.kind == KeyEventKind::Press => {
                 self.handle_key_event(key_event)
             }
@@ -93,17 +96,25 @@ impl App {
     }
     fn increment_counter(&mut self) {
         if self.pos == false {
-            self.countertime += 10;
+            if self.countertime >= 10 {
+                self.countertime += 10;
+            }
         } else {
-            self.countercel += 1;
+            if self.countercel >= 30 {
+                self.countercel += 1;
+            }
         }
     }
 
     fn decrement_counter(&mut self) {
         if self.pos == false {
-            self.countertime -= 10;
+            if self.countertime >= 100 {
+                self.countertime -= 10;
+            }
         } else {
-            self.countercel -= 1;
+            if self.countercel >= 30 {
+                self.countercel += 1;
+            }        
         }
     }
 }
@@ -123,6 +134,8 @@ impl Widget for &App {
             "<Down>".blue().bold(),
             " up ".into(),
             "<Up>".blue().bold(),
+            " enter ".into(),
+            "<Enter>".blue().bold(),
             " Quit ".into(),
             "<Q> ".blue().bold(),
         ]));
@@ -157,8 +170,8 @@ impl Widget for &App {
             " Celcius".blue().into(),
         ])]);
 
-        let blocknew = Block::new()
-            .title("Styled block")
+        let blocknew: Block = Block::new()
+            .title("hey <3 system settings editor <3 ")
             .padding(Padding::new(5, 10, 1, 2));
 
         Paragraph::new(counter_time)
