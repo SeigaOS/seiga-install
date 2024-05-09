@@ -3,7 +3,7 @@ use std::io::{self, stdout, Stdout};
 use crossterm::{execute, terminal::*};
 use ratatui::prelude::*;
 
-/// A type alias for the terminal type used in this application
+//this is cool
 pub type Tui = Terminal<CrosstermBackend<Stdout>>;
 
 /// Initialize the terminal
