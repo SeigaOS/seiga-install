@@ -1,3 +1,5 @@
+//this has been moved to a new repository 
+//on phone
 
 
 use sysinfo::{System, Components};
