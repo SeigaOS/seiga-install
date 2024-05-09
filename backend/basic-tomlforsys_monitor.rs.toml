@@ -1,3 +1,4 @@
 [tempcheck]
 checktimems = 60000
 checkthresholdcelc = 40.0
+//this has been moved to a new repository
